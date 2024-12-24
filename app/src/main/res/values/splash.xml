@@ -4,6 +4,6 @@
 
         <item name="windowSplashScreenBackground">#FFFF</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.AppCompat</item>
+        <item name="postSplashScreenTheme">@style/Theme.SplashScreen</item>
     </style>
 </resources>

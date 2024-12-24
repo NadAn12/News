@@ -1,22 +1,28 @@
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
-    id ("kotlin-kapt")
     id ("kotlin-parcelize")
+    id ("dagger.hilt.android.plugin")
+    id ("kotlin-kapt")
+    alias(libs.plugins.compose.compiler)
+
 }
 
 android {
     namespace = "com.example.news"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.news"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -33,7 +39,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
 
     compileOptions {
@@ -43,68 +49,66 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    kotlin {
+        jvmToolchain(17)
+    }
 }
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
+    implementation ("androidx.core:core-ktx:1.8.0")
+    implementation (platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1" )
+    implementation ("androidx.activity:activity-compose:1.5.1")
+    implementation (platform("androidx.compose:compose-bom:2022.10.00"))
+    implementation ("androidx.compose.ui:ui")
+    implementation ("androidx.compose.ui:ui-graphics")
+    implementation ("androidx.compose.ui:ui-tooling-preview")
+    implementation ("androidx.compose.material3:material3")
     implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation (platform(libs.kotlin.bom))
-    implementation (libs.androidx.lifecycle.runtime.ktx)
-    implementation (libs.androidx.activity.compose)
-    implementation (platform(libs.androidx.compose.bom))
-    implementation (libs.androidx.ui)
-    implementation (libs.androidx.ui.graphics)
-    implementation (libs.androidx.ui.tooling.preview)
-    implementation (libs.androidx.material3)
-    testImplementation (libs.junit)
-    androidTestImplementation (libs.androidx.junit.v115)
-    androidTestImplementation (libs.androidx.espresso.core.v351)
-    androidTestImplementation (platform(libs.androidx.compose.bom.v20221000))
-    androidTestImplementation (libs.androidx.ui.test.junit4)
-    debugImplementation (libs.androidx.ui.tooling)
-    debugImplementation (libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.appcompat)
+    testImplementation ("junit:junit:4.13.2")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation (platform("androidx.compose:compose-bom:2022.10.00"))
+    androidTestImplementation ("androidx.compose.ui:ui-test-junit4")
+    debugImplementation ("androidx.compose.ui:ui-tooling")
+    debugImplementation ("androidx.compose.ui:ui-test-manifest")
 
     //Splash Api
-    implementation (libs.androidx.core.splashscreen)
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 
     //Compose Navigation
-    implementation (libs.androidx.navigation.compose)
+    implementation ("androidx.navigation:navigation-compose:2.6.0")
 
     //Dagger Hilt
-    implementation (libs.hilt.android)
-    kapt (libs.hilt.compiler)
-    implementation (libs.androidx.hilt.navigation.compose)
+    implementation ("com.google.dagger:hilt-android:2.54")
+    kapt ("com.google.dagger:hilt-compiler:2.54")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
 
 
     //Retrofit
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
     //Coil
-    implementation (libs.coil.compose)
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     //Datastore
-    implementation (libs.androidx.datastore.preferences)
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
     //Compose Foundation
-    implementation (libs.androidx.foundation)
+    implementation ("androidx.compose.foundation:foundation:1.4.3")
 
     //Accompanist
-    implementation (libs.accompanist.systemuicontroller)
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
 
     //Paging 3
-    implementation (libs.androidx.paging.runtime)
-    implementation (libs.androidx.paging.compose)
+    implementation ("androidx.paging:paging-runtime:3.1.1")
+    implementation ("androidx.paging:paging-compose:3.2.0-rc01")
 
     //Room
-    implementation (libs.androidx.room.runtime)
-    kapt (libs.xandroidx.room.room.compiler)
+    implementation ("androidx.room:room-runtime:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
 }

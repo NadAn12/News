@@ -1,17 +1,24 @@
 package com.example.news
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ComponentActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity() {
+import androidx.lifecycle.lifecycleScope
+import com.example.news.domain.usecases.AppEntryUseCases
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+@AndroidEntryPoint
+class MainActivity : androidx.activity.ComponentActivity() {
+    @Inject
+    lateinit var appEntryUseCases: AppEntryUseCases
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-        enableEdgeToEdge()
+        
         setContentView(R.layout.activity_main)
     }
 }
