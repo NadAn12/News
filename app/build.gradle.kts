@@ -1,16 +1,18 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id ("com.android.application")
+    id ("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+    id ("kotlin-parcelize")
 }
 
 android {
     namespace = "com.example.news"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.news"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -27,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
@@ -46,58 +48,55 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation (libs.kotlin.bom)
+    implementation (platform(libs.kotlin.bom))
     implementation (libs.androidx.lifecycle.runtime.ktx)
     implementation (libs.androidx.activity.compose)
-    implementation (libs.androidx.compose.bom)
+    implementation (platform(libs.androidx.compose.bom))
     implementation (libs.androidx.ui)
     implementation (libs.androidx.ui.graphics)
     implementation (libs.androidx.ui.tooling.preview)
     implementation (libs.androidx.material3)
     testImplementation (libs.junit)
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation (libs.androidx.junit.v115)
     androidTestImplementation (libs.androidx.espresso.core.v351)
-    androidTestImplementation (platform('androidx.compose:compose-bom:2022.10.00'))
-    androidTestImplementation ('androidx.compose.ui:ui-test-junit4')
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    androidTestImplementation (platform(libs.androidx.compose.bom.v20221000))
+    androidTestImplementation (libs.androidx.ui.test.junit4)
+    debugImplementation (libs.androidx.ui.tooling)
+    debugImplementation (libs.androidx.ui.test.manifest)
 
     //Splash Api
-    implementation ("androidx.core:core-splashscreen:1.0.1")
+    implementation (libs.androidx.core.splashscreen)
 
     //Compose Navigation
-    implementation ("androidx.navigation:navigation-compose:2.6.0")
+    implementation (libs.androidx.navigation.compose)
 
     //Dagger Hilt
-    implementation ("com.google.dagger:hilt-android:2.45")
-    kapt ("com.google.dagger:hilt-compiler:2.45")
-    implementation ('androidx.hilt:hilt-navigation-compose:1.0.0')
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
 
 
     //Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ('com.squareup.retrofit2:converter-gson:2.9.0')
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
 
     //Coil
-    implementation ("io.coil-kt:coil-compose:2.4.0")
+    implementation (libs.coil.compose)
 
     //Datastore
-    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    implementation (libs.androidx.datastore.preferences)
 
     //Compose Foundation
-    implementation "androidx.compose.foundation:foundation:1.4.3"
+    implementation (libs.androidx.foundation)
 
     //Accompanist
-    implementation "com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta"
+    implementation (libs.accompanist.systemuicontroller)
 
     //Paging 3
-    def paging_version = "3.1.1"
-    implementation "androidx.paging:paging-runtime:$paging_version"
-    implementation "androidx.paging:paging-compose:3.2.0-rc01"
+    implementation (libs.androidx.paging.runtime)
+    implementation (libs.androidx.paging.compose)
 
     //Room
-    def room_version = "2.5.2"
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-ktx:2.5.2"
+    implementation (libs.androidx.room.runtime)
+    kapt (libs.xandroidx.room.room.compiler)
 }
