@@ -69,7 +69,7 @@ fun SearchBar(
             },
             placeholder = {
                 Text(
-                    text = "Search",
+                    text = "Поиск",
                     style = MaterialTheme.typography.bodySmall,
                     color = colorResource(id = R.color.placeholder)
                 )

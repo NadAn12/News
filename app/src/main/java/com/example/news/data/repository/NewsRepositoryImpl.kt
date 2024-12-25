@@ -3,6 +3,7 @@ package com.example.news.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.example.news.data.SeacrhNewsPagingSource
 import com.example.news.data.dto.NewsApi
 import com.example.news.data.dto.NewsPagingSource
 import com.example.news.domain.model.Article
@@ -17,6 +18,19 @@ class NewsRepositoryImpl (
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
                 NewsPagingSource(
+                    newsApi = newsApi,
+                    sources = sources.joinToString(separator = ",")
+                )
+            }
+        ).flow
+    }
+
+    override fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = {
+                SeacrhNewsPagingSource(
+                    searchQuery = searchQuery,
                     newsApi = newsApi,
                     sources = sources.joinToString(separator = ",")
                 )
