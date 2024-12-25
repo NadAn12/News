@@ -45,7 +45,7 @@ fun EmptyScreen(error: LoadState.Error? = null) {
     }
 
     if (error == null){
-        message = "You have not saved news so far !"
+        message = "Вы не сохранили новость!"
         icon = R.drawable.ic_search_document
     }
 
@@ -96,15 +96,15 @@ fun EmptyContent(alphaAnim: Float, message: String, iconId: Int) {
 fun parseErrorMessage(error: LoadState.Error?): String {
     return when (error?.error) {
         is SocketTimeoutException -> {
-            "Server Unavailable."
+            "Сервер недоступен"
         }
 
         is ConnectException -> {
-            "Internet Unavailable."
+            "Интернет недоступен"
         }
 
         else -> {
-            "Unknown Error."
+            "Неизвестная ошибка"
         }
     }
 }
@@ -113,5 +113,5 @@ fun parseErrorMessage(error: LoadState.Error?): String {
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun EmptyScreenPreview() {
-    EmptyContent(alphaAnim = 0.3f, message = "Internet Unavailable.",R.drawable.ic_network_error)
+    EmptyContent(alphaAnim = 0.3f, message = "Инернет недоступен",R.drawable.ic_network_error)
 }
