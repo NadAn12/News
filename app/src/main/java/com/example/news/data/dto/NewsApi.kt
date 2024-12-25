@@ -1,4 +1,4 @@
-package com.example.news.remote.dto
+package com.example.news.data.dto
 
 import com.example.news.util.Constants.API_KEY
 import retrofit2.http.GET
@@ -11,5 +11,5 @@ interface NewsApi {
         @Query("sources") sources: String,
         @Query("apiKey") apiKey: String = API_KEY
 
-    ) :NewsResponse
+    ) : NewsResponse
 }
