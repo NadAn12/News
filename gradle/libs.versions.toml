@@ -34,6 +34,7 @@ retrofit = "2.9.0"
 roomRuntime = "2.6.1"
 xandroidxRoomCompiler = "2.5.1"
     implementation = "androidx.room"
+leanback = "1.0.0"
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
@@ -75,6 +76,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 xandroidx-room-room-compiler = { module = "androidx.room:room-compiler", version.ref = "xandroidxRoomCompiler" }
+androidx-leanback = { group = "androidx.leanback", name = "leanback", version.ref = "leanback" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
