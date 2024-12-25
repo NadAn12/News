@@ -54,7 +54,7 @@ fun DetailsTopBar(
             }
             IconButton(onClick = onShareClick) {
                 Icon(
-                    imageVector = Icons.Default.Search,
+                    imageVector = Icons.Default.Share,
                     contentDescription = null
                 )
             }
