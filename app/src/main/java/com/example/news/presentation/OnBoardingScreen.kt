@@ -29,7 +29,9 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    event: (OnBoadingEvent) -> Unit
+) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0) {
@@ -68,7 +70,7 @@ fun OnBoardingScreen() {
                 text = buttonState.value[0],
                 onClick = {
                     scope.launch {
-                        //TODO: Navigate to Home Screen
+                        event(OnBoadingEvent.SaveAppEntry)
 
                     }
                 }
