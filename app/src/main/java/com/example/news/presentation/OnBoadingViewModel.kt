@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnBoadingViewModel @Inject constructor(
+class OnBoardingViewModel @Inject constructor(
 
     private val appEntryUseCases: AppEntryUseCases
 ) : ViewModel() {

@@ -1,6 +1,5 @@
 package com.example.news.presentation
 
-import androidx.compose.foundation.Indication
 import androidx.compose.ui.unit.dp
 
 object Dimens {

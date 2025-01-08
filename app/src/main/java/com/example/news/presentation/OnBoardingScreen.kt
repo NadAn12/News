@@ -19,9 +19,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.unit.dp
-import androidx.leanback.widget.Row
-import com.example.news.presentation.Dimens.MediumPadding1
 import com.example.news.presentation.Dimens.MediumPadding2
 import com.example.news.presentation.Dimens.PageIndicatorWidth
 import com.example.news.presentation.common.NewsButton
@@ -78,8 +75,7 @@ fun OnBoardingScreen(
 
         }
         }
-
-
+        Spacer(modifier = Modifier.weight(0.5f))
     }
 }
 

@@ -24,7 +24,6 @@ import com.example.news.presentation.Dimens.MediumPadding1
 import com.example.news.presentation.common.ArticlesList
 import com.example.news.presentation.common.SearchBar
 import com.example.news.presentation.nvgraph.Route
-import com.example.news.ui.theme.NewsAppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

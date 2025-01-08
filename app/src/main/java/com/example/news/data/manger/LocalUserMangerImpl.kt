@@ -1,9 +1,7 @@
 package com.example.news.data.manger
 
 import android.content.Context
-import androidx.compose.ui.unit.Constraints
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit

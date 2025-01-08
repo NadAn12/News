@@ -1,13 +1,15 @@
 package com.example.news.presentation.details.copmonent
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -73,11 +75,13 @@ fun DetailsTopBar(
 @Composable
 fun DetailsTopBarPreview() {
     NewsAppTheme(dynamicColor = false) {
-        DetailsTopBar(
-            onShareClick = { /*TODO*/ },
-            onBookMarkClick = { /*TODO*/ },
-            onBrowsingClick = {}) {
+        Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+            DetailsTopBar(
+                onShareClick = { /*TODO*/ },
+                onBookMarkClick = { /*TODO*/ },
+                onBrowsingClick = {}) {
 
+            }
         }
     }
 }

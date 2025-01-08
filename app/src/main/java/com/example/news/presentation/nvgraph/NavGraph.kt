@@ -6,8 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.news.presentation.OnBoadingViewModel
 import com.example.news.presentation.OnBoardingScreen
+import com.example.news.presentation.OnBoardingViewModel
 import com.example.news.presentation.search.SearchScreen
 import com.example.news.presentation.search.SearchViewModel
 
@@ -23,7 +23,7 @@ fun NavGraph(startDestination: String){
             composable(
                 route = Route.OnBoardingScreen.route
             ){
-                val viewModel: OnBoadingViewModel = hiltViewModel()
+                val viewModel: OnBoardingViewModel = hiltViewModel()
                 OnBoardingScreen(
                     event = viewModel::onEvent
                 )

@@ -2,7 +2,6 @@ package com.example.news.di
 
 import android.app.Application
 import com.example.news.data.dto.NewsApi
-import com.example.news.data.dto.NewsResponse
 import com.example.news.data.manger.LocalUserMangerImpl
 import com.example.news.data.repository.NewsRepositoryImpl
 import com.example.news.domain.manger.LocalUserManger
@@ -20,7 +19,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -37,16 +35,16 @@ object AppModule {
     @Singleton
     fun provideAppEntryUseCases(
         localUserManger: LocalUserManger
-    ) = AppEntryUseCases(
-
+    ): AppEntryUseCases = AppEntryUseCases(
         readAppEntry = ReadAppEntry(localUserManger),
         saveAppEntry = SaveAppEntry(localUserManger)
     )
 
     @Provides
     @Singleton
-    fun provideNewsApi(): NewsApi {
-        return Retrofit.Builder()
+    fun provideApiInstance(): NewsApi {
+        return Retrofit
+            .Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -57,19 +55,21 @@ object AppModule {
     @Singleton
     fun provideNewsRepository(
         newsApi: NewsApi
-    ): NewsRepository = NewsRepositoryImpl(newsApi)
-
-
+    ): NewsRepository {
+        return NewsRepositoryImpl(newsApi)
+    }
 
     @Provides
     @Singleton
     fun provideNewsUseCases(
         newsRepository: NewsRepository
-    ): NewsUseCases{
+    ): NewsUseCases {
         return NewsUseCases(
             getNews = GetNews(newsRepository),
             searchNews = SearchNews(newsRepository)
         )
     }
+
 }
+
 
