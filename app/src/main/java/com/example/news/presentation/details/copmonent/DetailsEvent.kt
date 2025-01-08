@@ -2,6 +2,8 @@ package com.example.news.presentation.details.copmonent
 
 sealed class DetailsEvent {
 
-    object SaveArticle : DetailsEvent()
+    object UpsertDeleteArticle : DetailsEvent()
+
+    object RemoveSideEffect : DetailsEvent()
 
 }
