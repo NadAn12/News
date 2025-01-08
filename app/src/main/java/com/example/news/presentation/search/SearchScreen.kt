@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.news.domain.model.Article
 import com.example.news.presentation.Dimens.MediumPadding1
 import com.example.news.presentation.common.ArticlesList
 import com.example.news.presentation.common.SearchBar
@@ -18,7 +19,7 @@ import com.example.news.presentation.nvgraph.Route
 fun SearchScreen(
     state: SearchState,
     event:(SearchEvent) -> Unit,
-    navigate: (String) -> Unit
+    navigateToDetails: (Article) -> Unit
 ) {
 
     Column(
@@ -41,7 +42,7 @@ fun SearchScreen(
             ArticlesList(
                 articles = articles,
                 onClick = {
-                    navigate(Route.DetailsCScreen.route)
+                    navigateToDetails(it)
                 }
             )
         }
