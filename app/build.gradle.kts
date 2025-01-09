@@ -3,9 +3,8 @@ plugins {
     id ("org.jetbrains.kotlin.android")
     id ("kotlin-parcelize")
     id ("dagger.hilt.android.plugin")
-    id ("kotlin-kapt")
+    id ("com.google.devtools.ksp")
     alias(libs.plugins.compose.compiler)
-
 }
 
 android {
@@ -23,6 +22,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 
     buildTypes {
@@ -39,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 
     compileOptions {
@@ -84,8 +86,8 @@ dependencies {
 
     //Dagger Hilt
     implementation ("com.google.dagger:hilt-android:2.54")
-    kapt ("com.google.dagger:hilt-compiler:2.54")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+    ksp ("com.google.dagger:hilt-compiler:2.54")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
 
 
     //Retrofit
@@ -109,7 +111,9 @@ dependencies {
     implementation ("androidx.paging:paging-compose:3.2.0-rc01")
 
     //Room
-    implementation ("androidx.room:room-runtime:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
-    implementation ("androidx.room:room-ktx:2.6.1")
+
+    implementation ("androidx.room:room-runtime:2.5.2")
+    ksp ("androidx.room:room-compiler:2.5.2")
+    implementation ("androidx.room:room-ktx:2.5.2")
+
 }
