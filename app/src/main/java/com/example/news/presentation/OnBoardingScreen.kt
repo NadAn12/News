@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import com.example.news.presentation.Dimens.MediumPadding2
 import com.example.news.presentation.Dimens.PageIndicatorWidth
-import com.example.news.presentation.common.NewsButton
+import com.example.news.presentation.сommon.NewsButton
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)

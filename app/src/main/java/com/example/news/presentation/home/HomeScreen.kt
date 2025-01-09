@@ -1,6 +1,7 @@
 package com.example.news.presentation.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
 import com.example.news.R
@@ -23,7 +25,6 @@ import com.example.news.domain.model.Article
 import com.example.news.presentation.Dimens.MediumPadding1
 import com.example.news.presentation.common.ArticlesList
 import com.example.news.presentation.common.SearchBar
-import com.example.news.presentation.nvgraph.Route
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -45,6 +46,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigateToSearch: () -> Unit,
             .padding(top = MediumPadding1)
             .statusBarsPadding()
     ) {
+
 
         SearchBar(
             modifier = Modifier.padding(horizontal = MediumPadding1), text = " ", readOnly = true, onValueChange = {}, onClick = {

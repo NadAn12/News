@@ -14,6 +14,30 @@ import com.example.news.domain.model.Article
 import com.example.news.presentation.Dimens.ExtraSmallPadding2
 import com.example.news.presentation.Dimens.MediumPadding1
 
+
+@Composable
+fun ArticlesList(
+    modifier: Modifier = Modifier,
+    articles: List<Article>,
+    onClick:(Article) -> Unit
+){
+
+    if (articles.isEmpty()){
+        EmptyScreen()
+    }
+        LazyColumn(
+            modifier = modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+            contentPadding = PaddingValues(all = ExtraSmallPadding2)
+        ){
+            items(count = articles.size){
+                val article = articles[it]
+                    ArticleCard(article = article, onClick = { onClick(article)})
+                }
+            }
+        }
+
+
 @Composable
 fun ArticlesList(
     modifier: Modifier = Modifier,
@@ -24,7 +48,7 @@ fun ArticlesList(
 
     if (handlePagingResult){
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(MediumPadding1),
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
         ){
@@ -54,6 +78,12 @@ fun handlePagingResult( articles: LazyPagingItems<Article>, ):Boolean {
 
         }
         error != null -> {
+            EmptyScreen(
+                error = error
+            )
+            false
+        }
+        articles.itemCount == 0 -> {
             EmptyScreen()
             false
         }

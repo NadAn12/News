@@ -13,10 +13,15 @@ import com.example.news.domain.repository.NewsRepository
 import com.example.news.domain.usecases.app_entry.AppEntryUseCases
 import com.example.news.domain.usecases.app_entry.ReadAppEntry
 import com.example.news.domain.usecases.app_entry.SaveAppEntry
+import com.example.news.domain.usecases.news.DeleteArticle
 import com.example.news.domain.usecases.news.GetNews
 import com.example.news.domain.usecases.news.NewsUseCases
 import com.example.news.domain.usecases.news.SearchNews
+import com.example.news.domain.usecases.news.SelectArticle
+import com.example.news.domain.usecases.news.SelectArticles
+import com.example.news.domain.usecases.news.UpsertArticle
 import com.example.news.util.Constants.BASE_URL
+import com.example.news.util.Constants.NEWS_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,19 +63,25 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNewsRepository(
-        newsApi: NewsApi
+        newsApi: NewsApi,
+        newsDao: NewsDao
     ): NewsRepository {
-        return NewsRepositoryImpl(newsApi)
+        return NewsRepositoryImpl(newsApi, newsDao)
     }
 
     @Provides
     @Singleton
     fun provideNewsUseCases(
-        newsRepository: NewsRepository
+        newsRepository: NewsRepository,
+        newsDao: NewsDao
     ): NewsUseCases {
         return NewsUseCases(
             getNews = GetNews(newsRepository),
-            searchNews = SearchNews(newsRepository)
+            searchNews = SearchNews(newsRepository),
+            upsertArticle = UpsertArticle(newsRepository),
+            deleteArticle = DeleteArticle(newsRepository),
+            selectArticle = SelectArticle(newsRepository),
+            selectArticles = SelectArticles(newsRepository)
         )
     }
 
@@ -82,7 +93,7 @@ object AppModule {
         return Room.databaseBuilder(
             context = application,
             klass = NewsDatabase::class.java,
-            name = "news_db"
+            name = NEWS_DATABASE_NAME
         ).addTypeConverter(NewsTypeConvertor())
             .fallbackToDestructiveMigration()
             .build()
