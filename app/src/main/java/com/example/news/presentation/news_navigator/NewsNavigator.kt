@@ -1,5 +1,6 @@
 package com.example.news.presentation.news_navigator
 
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -7,11 +8,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -21,6 +24,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.news.R
 import com.example.news.domain.model.Article
+import com.example.news.presentation.bookmark.BookmarkScreen
+import com.example.news.presentation.bookmark.BookmarkViewModel
+import com.example.news.presentation.details.copmonent.DetailsEvent
+import com.example.news.presentation.details.copmonent.DetailsScreen
+import com.example.news.presentation.details.copmonent.DetailsViewModel
 import com.example.news.presentation.home.HomeScreen
 import com.example.news.presentation.home.HomeViewModel
 import com.example.news.presentation.nvgraph.Route
@@ -33,8 +41,9 @@ fun NewsNavigator() {
 
     val bottomNavigationItems = remember {
         listOf(
-            BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-            BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
+            BottomNavigationItem(icon = R.drawable.ic_home, text = "Главная"),
+            BottomNavigationItem(icon = R.drawable.ic_search, text = "Поиск"),
+            BottomNavigationItem(icon = R.drawable.ic_bookmark, text = "Избранное"),
         )
     }
 
@@ -46,6 +55,7 @@ fun NewsNavigator() {
     selectedItem = when (backStackState?.destination?.route) {
         Route.HomeScreen.route -> 0
         Route.SearchScreen.route -> 1
+        Route.BookmarkScreen.route -> 2
         else -> 0
     }
 
@@ -71,6 +81,10 @@ fun NewsNavigator() {
                         1 -> navigateToTab(
                             navController = navController,
                             route = Route.SearchScreen.route
+                        )
+                        2 -> navigateToTab(
+                            navController = navController,
+                            route = Route.BookmarkScreen.route
                         )
                     }
                 }
@@ -115,6 +129,37 @@ fun NewsNavigator() {
                             article = article
                         )
                     },
+                )
+            }
+            composable(route = Route.DetailsScreen.route) {
+                val viewModel: DetailsViewModel = hiltViewModel()
+                if (viewModel.sideEffect != null){
+                    Toast.makeText(LocalContext.current, viewModel.sideEffect, Toast.LENGTH_SHORT).show()
+                    viewModel.onEvent(DetailsEvent.RemoveSideEffect)
+                }
+                navController.previousBackStackEntry?.savedStateHandle?.get<Article?>("article")
+                    ?.let { article ->
+                        DetailsScreen(
+                            article = article,
+                            event = viewModel::onEvent,
+                            navigateUp = { navController.navigateUp() },
+
+                        )
+                    }
+
+            }
+            composable(route = Route.BookmarkScreen.route) {
+                val viewModel: BookmarkViewModel = hiltViewModel()
+                val state = viewModel.state.value
+                OnBackClickStateSaver(navController = navController)
+                BookmarkScreen(
+                    state = state,
+                    navigateToDetails = { article ->
+                        navigateToDetails(
+                            navController = navController,
+                            article = article
+                        )
+                    }
                 )
             }
 

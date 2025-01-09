@@ -35,6 +35,8 @@ fun DetailsScreen(
     navigateUp: () -> Unit
 ) {
     val context = LocalContext.current
+
+
     Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
         DetailsTopBar(
             onBrowsingClick = {
@@ -55,7 +57,7 @@ fun DetailsScreen(
                 }
             },
             onBookMarkClick = { //избранное
-                event(DetailsEvent.UpsertDeleteArticle)
+                event(DetailsEvent.UpsertDeleteArticle(article))
             },
             onBackClick = navigateUp
         )

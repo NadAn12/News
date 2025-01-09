@@ -75,8 +75,9 @@ data class BottomNavigationItem(
 fun NewsBottomNavigationPreview() {
     NewsAppTheme(dynamicColor = false) {
         NewsBottomNavigation(items = listOf(
-            BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-            BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
+            BottomNavigationItem(icon = R.drawable.ic_home, text = "Главная"),
+            BottomNavigationItem(icon = R.drawable.ic_search, text = "Поиск"),
+            BottomNavigationItem(icon = R.drawable.ic_bookmark, text = "Избранное"),
         ), selectedItem = 0, onItemClick = {})
     }
 }

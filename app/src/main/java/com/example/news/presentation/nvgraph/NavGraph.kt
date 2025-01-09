@@ -9,8 +9,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.news.presentation.OnBoardingScreen
 import com.example.news.presentation.OnBoardingViewModel
 import com.example.news.presentation.news_navigator.NewsNavigator
-import com.example.news.presentation.search.SearchScreen
-import com.example.news.presentation.search.SearchViewModel
 
 @Composable
 fun NavGraph(startDestination: String){
